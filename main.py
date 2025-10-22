@@ -63,13 +63,7 @@ def define_options():
     pipeline_options.do_picture_description = True
     pipeline_options.picture_description_options = granite_picture_description
 
-    pipeline_options.picture_description_options.prompt = """
-    Analyze and describe this image in three concise sentences:
-    1. What type of visual element is this (e.g., graph, diagram, photo, illustration)?
-    2. What are the key components or data being shown?
-    3. What is the main insight or purpose of this visual?
-    4. Is this visual relevant in terms of content?
-    """
+    pipeline_options.picture_description_options.prompt = """What is on this image?"""
 
     converter = DocumentConverter(format_options={
         InputFormat.PDF: PdfFormatOption(pipeline_options=pipeline_options)
