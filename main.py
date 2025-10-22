@@ -12,6 +12,7 @@ from docling.datamodel.pipeline_options import (
 )
 
 import torch
+from pathlib import Path
 
 
 
@@ -84,6 +85,9 @@ def main():
 
     converter = define_options()
     result = converter.convert(source)
+
+    # Create output Folder if it not exists
+    Path("output").mkdir(exist_ok=True)
 
     # Print Markdown to stdout.
     result.document.save_as_markdown("output.md")
