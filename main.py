@@ -8,14 +8,11 @@ from docling.datamodel.pipeline_options import (
     AcceleratorDevice,
     TesseractOcrOptions,
     TableFormerMode,
-    granite_picture_description,
-    smolvlm_picture_description
+    granite_picture_description
 )
 
 import torch
 from pathlib import Path
-
-
 
 def define_options():
     if torch.cuda.is_available():
@@ -61,7 +58,7 @@ def define_options():
     # Picture classification and description with device configuration
     pipeline_options.do_picture_classification = True
     pipeline_options.do_picture_description = True
-    pipeline_options.picture_description_options = smolvlm_picture_description
+    pipeline_options.picture_description_options = granite_picture_description
     pipeline_options.picture_description_options.prompt = """Describe the image in three sentences. Be consise and accurate."""
     pipeline_options.images_scale = 2.0
     pipeline_options.generate_picture_images = True
