@@ -71,7 +71,7 @@ def define_options():
 
 def main():
     # Check if there's a PDF in the input folder, otherwise use URL
-    input_dir = Path("/app/input")
+    input_dir = Path("input")
     pdf_files = list(input_dir.glob("*.pdf"))
     
     source = pdf_files[0]  # Use first PDF found in input folder
