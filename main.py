@@ -82,9 +82,9 @@ def main():
     Path("output").mkdir(exist_ok=True)
 
     # Print Markdown to stdout.
-    result.document.save_as_markdown("output.md")
+    result.document.save_as_markdown("output/output.md")
     print("Markdown saved to output.md")
-    result.document.save_as_json("output.json")
+    result.document.save_as_json("output/output.json")
     print("JSON saved to output.json")
 
 
