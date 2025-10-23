@@ -14,21 +14,21 @@ from docling.datamodel.pipeline_options import (
 import torch
 from pathlib import Path
 
-def define_options():
+def get_device():
     if torch.cuda.is_available():
-        device = "cuda"
         accelerator_device = AcceleratorDevice.CUDA
         print("Using CUDA device for AI models")
     elif torch.backends.mps.is_available():
-        device = "mps"
         accelerator_device = AcceleratorDevice.MPS
         print("Using MPS device for AI models")
     else:
-        device = "cpu"
         accelerator_device = AcceleratorDevice.CPU
         print("Using CPU device for AI models")
+    return accelerator_device
 
+def define_options():
     # Configure accelerator options with detected device and Flash Attention 2
+    accelerator_device = get_device()
     accelerator_options = AcceleratorOptions(
         num_threads=4, 
         device=accelerator_device,
