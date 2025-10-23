@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
     python3.12 \
     python3.12-dev \
     python3.12-venv \
-    python3-pip \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -27,8 +26,9 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
 # Install pip for Python 3.12 using get-pip.py
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 
-# Install modern setuptools and wheel to avoid distutils issues
-RUN pip install --upgrade setuptools wheel
+# Remove old system setuptools and install modern versions
+RUN rm -rf /usr/lib/python3/dist-packages/setuptools* && \
+    pip install --upgrade --force-reinstall setuptools wheel
 
 # Set working directory
 WORKDIR /app
