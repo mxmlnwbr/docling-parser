@@ -74,12 +74,8 @@ def main():
     input_dir = Path("/app/input")
     pdf_files = list(input_dir.glob("*.pdf"))
     
-    if pdf_files:
-        source = pdf_files[0]  # Use first PDF found in input folder
-        print(f"Processing local file: {source.name}")
-    else:
-        source = "https://arxiv.org/pdf/2408.09869"
-        print(f"Processing remote file: {source}")
+    source = pdf_files[0]  # Use first PDF found in input folder
+    print(f"Processing local file: {source.name}")
 
     converter = define_options()
     result = converter.convert(source)
