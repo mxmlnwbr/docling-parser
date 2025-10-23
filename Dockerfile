@@ -27,6 +27,9 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
 # Install pip for Python 3.12 using get-pip.py
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 
+# Install modern setuptools and wheel to avoid distutils issues
+RUN pip install --upgrade setuptools wheel
+
 # Set working directory
 WORKDIR /app
 
