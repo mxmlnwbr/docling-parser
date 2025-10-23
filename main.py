@@ -70,13 +70,29 @@ def define_options():
 
 
 def main():
-    # Check if there's a PDF in the input folder, otherwise use URL
-    input_dir = Path("input")
-    pdf_files = list(input_dir.glob("*.pdf"))
-    print(pdf_files)
+    # Check if running in Docker or locally
+    docker_input = Path("/app/input")
+    local_input = Path("input")
     
-    source = pdf_files[0]  # Use first PDF found in input folder
-    print(f"Processing local file: {source.name}")
+    print(f"Docker input path exists: {docker_input.exists()}")
+    print(f"Local input path exists: {local_input.exists()}")
+    
+    if docker_input.exists():
+        input_dir = docker_input
+        print(f"Using Docker input directory: {input_dir}")
+    else:
+        input_dir = local_input
+        print(f"Using local input directory: {input_dir}")
+    
+    pdf_files = list(input_dir.glob("*.pdf"))
+    print(f"Found {len(pdf_files)} PDF files: {pdf_files}")
+    
+    if pdf_files:
+        source = pdf_files[0]
+        print(f"Processing local file: {source.name} at {source.absolute()}")
+    else:
+        source = "https://arxiv.org/pdf/2408.09869"
+        print(f"No local PDFs found. Processing remote file: {source}")
 
     converter = define_options()
     result = converter.convert(source)
