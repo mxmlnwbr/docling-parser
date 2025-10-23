@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
     python3.12-venv \
     git \
     curl \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Set Python 3.12 as default
@@ -43,8 +49,8 @@ RUN pip install torch torchvision torchaudio --index-url https://download.pytorc
 # Install project dependencies
 RUN pip install docling==2.58.0
 
-# Create output directory
-RUN mkdir -p /app/output
+# Create input and output directories
+RUN mkdir -p /app/input /app/output
 
 # Set the default command
 CMD ["python3", "main.py"]

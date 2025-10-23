@@ -6,6 +6,8 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     volumes:
+      # Mount input directory for local PDF files (optional)
+      - ./input:/app/input
       # Mount output directory to save results back to repository
       - ./output:/app/output
     deploy:

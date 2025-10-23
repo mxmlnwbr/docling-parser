@@ -70,10 +70,16 @@ def define_options():
 
 
 def main():
-    # Change this to a local path or another URL if desired.
-    # Note: using the default URL requires network access; if offline, provide a
-    # local file path (e.g., Path("/path/to/file.pdf")).
-    source = "https://arxiv.org/pdf/2408.09869"
+    # Check if there's a PDF in the input folder, otherwise use URL
+    input_dir = Path("/app/input")
+    pdf_files = list(input_dir.glob("*.pdf"))
+    
+    if pdf_files:
+        source = pdf_files[0]  # Use first PDF found in input folder
+        print(f"Processing local file: {source.name}")
+    else:
+        source = "https://arxiv.org/pdf/2408.09869"
+        print(f"Processing remote file: {source}")
 
     converter = define_options()
     result = converter.convert(source)
