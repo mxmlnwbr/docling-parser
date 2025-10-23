@@ -10,6 +10,8 @@ services:
       - ./input:/app/input
       # Mount output directory to save results back to repository
       - ./output:/app/output
+      # Mount HuggingFace cache to persist model downloads (5GB+)
+      - ./hf_cache:/root/.cache/huggingface
     deploy:
       resources:
         reservations:
