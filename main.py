@@ -73,6 +73,7 @@ def main():
     # Check if there's a PDF in the input folder, otherwise use URL
     input_dir = Path("input")
     pdf_files = list(input_dir.glob("*.pdf"))
+    print(pdf_files)
     
     source = pdf_files[0]  # Use first PDF found in input folder
     print(f"Processing local file: {source.name}")
